@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ws test</title>
+</head>
+<body>
+
+<span id="see">一共打开　<b id="count">1</b>　个页面</span>
+
+</body>
+
+<script type="text/javascript">
+
+    // 打开一个 web socket
+    let ws = new WebSocket("ws://192.168.1.180:9501");
+
+    ws.onopen = function (evt) {
+        // Web Socket 已连接上，使用 send() 方法发送数据
+        ws.send("发送数据");
+        console.log("Web Socket 已连接上，使用 send() 方法发送数据");
+    };
+
+    ws.onmessage = function (evt) {
+
+        let received_msg = evt.data;
+
+        document.getElementById('count').innerHTML = received_msg;
+
+        console.log("数据已接收..." + received_msg);
+    };
+
+    // ws.onclose = function () {
+    //     // 关闭 websocket
+    //     console.log('关闭 websocket');
+    // };
+
+</script>
+
+</html>
+
